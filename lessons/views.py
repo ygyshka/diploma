@@ -1,6 +1,7 @@
 from rest_framework import generics
 
 from lessons.models import Lesson
+from lessons.paginations import NotesPagination
 from lessons.serializer import LessonSerializer
 from users.permissions import IsSuperUser
 
@@ -16,6 +17,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all().order_by('note_id')
+    pagination_class = NotesPagination
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
