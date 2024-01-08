@@ -5,8 +5,10 @@ from django.db import models
 
 class Lesson(models.Model):
 
-    note_id = models.SmallIntegerField(default=1, verbose_name='Порядковый номер')
-    title = models.CharField(max_length=150, verbose_name='Образовательный модуль')
+    note_id = models.SmallIntegerField(default=1,
+                                       verbose_name='Порядковый номер')
+    title = models.CharField(max_length=150,
+                             verbose_name='Образовательный модуль')
     description = models.TextField(verbose_name='Описание модуля')
 
     def __str__(self):
