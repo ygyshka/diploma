@@ -32,6 +32,8 @@ class LessonsTestCase(APITestCase):
         self.lesson.save()
 
     def test_create_user(self):
+        """Тест  регистрации пользователя """
+
         user_data = {
             'email': 'test1@mail.ru',
             'password': 'new_test',
@@ -46,7 +48,7 @@ class LessonsTestCase(APITestCase):
         self.assertTrue(user.check_password(user_data['password']))
 
     def test_create_lesson(self):
-
+        """ Тест создания образовательного модуля """
         data = {
             'note_id': self.lesson.note_id,
             'title': self.lesson.title,
@@ -67,14 +69,14 @@ class LessonsTestCase(APITestCase):
         )
 
     def test_list_lessons(self):
-
+        """ Тест вывода списка образовательных модулей """
         response = self.client.get('/lessons/', format='json')
         self.assertEqual(
             response.status_code, status.HTTP_200_OK
         )
 
     def test_retrieve_lesson(self):
-
+        """ Тестирование вывода определенного модуля """
         response = self.client.get(f'/lesson/{self.lesson.id}', format='json')
         self.assertEqual(
             response.status_code, status.HTTP_200_OK
@@ -87,7 +89,7 @@ class LessonsTestCase(APITestCase):
         )
 
     def test_update_lesson(self):
-
+        """ Тестирование обновления образовательного модуля + тестирование отработки ограничений прав пользователей"""
         data = {
             'title': 'Math',
             'description': 'Science about mathematics'
@@ -110,7 +112,7 @@ class LessonsTestCase(APITestCase):
         )
 
     def test_delete_lesson(self):
-
+        """ Тестирование удаления образовательного модуля """
         response = self.client.delete(f'/lesson/destroy/{self.lesson.id}', format='json')
         self.assertEqual(
             response.status_code, status.HTTP_204_NO_CONTENT
